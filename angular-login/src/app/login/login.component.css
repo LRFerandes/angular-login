@@ -1,0 +1,69 @@
+.box_form{
+    position:relative;
+    width: 300px;
+    height: 400px;
+}
+form{
+
+    margin-top: 30px;
+
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+
+}
+input{
+    width: 200px;
+    padding: 10px 10px 10px 10px;
+    border-radius: 20px 20px 20px 20px;
+    margin-top: 5px;
+
+    border: none;
+    background-color: lightgray;
+}
+button{
+    width: 220px;
+    padding: 10px 10px 10px 10px;
+    border-radius: 20px 20px 20px 20px;
+    margin-top: 20px;
+
+    background-color: #70B656;
+    color: white;
+    cursor: pointer;
+
+    border: none;
+}
+button:hover{
+    background-color: #42852a;
+}
+p{
+    text-align: center;
+
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+    font-size: 16px;
+
+}
+.ptitle{
+    margin-bottom: 30px;
+    font-size: 20px;
+
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+.pforgot{
+    margin-bottom: 80px;
+
+   
+}
+a{
+    text-decoration: none;
+
+}
+a:hover{
+    text-decoration: underline;
+}

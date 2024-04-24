@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.main{
+    display: flex;
+
+    position:relative;
+     
+     background-color: #4E5AC8;
+     background-image: linear-gradient(to bottom right, #4E5AC8, #B15ABB);
+ 
+     height: 100vh;
+ 
+}
+.box_content{
+    display: flex;
+
+    height: 400px;
+    width: 300px;
+    background-color: white;
+
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: 5px;
+}

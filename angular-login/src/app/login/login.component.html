@@ -1,0 +1,18 @@
+<div class="box_form">
+    <form (ngSubmit)="submitForm()" >
+      <p class="ptitle"> Login </p>
+
+        <div>
+          <input type="email" id="email" name="email" placeholder="Email"  required>
+        </div>
+        <div>
+          <input type="password" id="password" name="password" placeholder="Password" required>
+        </div>
+        <button type="submit">Login</button>
+
+        <p class="pforgot"> forgot <a  routerLink="/forgot">password?</a></p>
+
+        <p class="pcreate"> <a routerLink="/create">create</a> your account</p>
+    </form>
+    
+</div>
