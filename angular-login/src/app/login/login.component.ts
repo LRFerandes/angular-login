@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -7,19 +9,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  meuForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder, private http: HttpClient) { 
+    this.meuForm = this.formBuilder.group({
+      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      // Outros campos do formulário
+    });
+  }
 
   ngOnInit(): void {
   }
 
-  formData = {
-    email: '',
-    password: ''
-  };
+  private apiURL = 'http://localhost:8080/login';
+
 
   submitForm() {
-    console.log('Formulário enviado!', this.formData);
-    // Aqui você pode adicionar a lógica para enviar os dados para um serviço, por exemplo.
+    console.log('Formulário enviado!', this.meuForm);
+    
+
+    this.http.post(this.apiURL, this.meuForm.value)
+      .subscribe((response) => {
+        console.log('Resposta da API:', response);
+        // Lidar com a resposta da API aqui
+      }, (error) => {
+        console.error('Erro ao fazer solicitação:', error);
+        // Lidar com erros aqui
+      });
+
+
   }
 
 }

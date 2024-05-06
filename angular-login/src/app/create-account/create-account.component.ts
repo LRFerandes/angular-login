@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-account',
@@ -6,21 +8,48 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-account.component.css']
 })
 export class CreateAccountComponent implements OnInit {
+  
+  meuForm: FormGroup;
 
-  constructor() { }
+  constructor(private http: HttpClient, private formBuilder: FormBuilder) { 
 
-  ngOnInit(): void {
+    this.meuForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      userrole : 'admin',
+      // Outros campos do formulário
+    });
+
+    
+
+
   }
 
-  formData = {
-    name:'',
-    email: '',
-    password: ''
-  };
+
+  ngOnInit(): void {
+    
+  }
+  private apiURL = 'http://localhost:8080/register';
+
+  
 
   submitForm() {
-    console.log('Formulário enviado!', this.formData);
-    // Aqui você pode adicionar a lógica para enviar os dados para um serviço, por exemplo.
+
+    
+    
+    console.log('Formulário enviado!', this.meuForm);
+    
+
+    this.http.post(this.apiURL, this.meuForm.value)
+      .subscribe((response) => {
+        console.log('Resposta da API:', response);
+        // Lidar com a resposta da API aqui
+      }, (error) => {
+        console.error('Erro ao fazer solicitação:', error);
+        // Lidar com erros aqui
+      });
+
   }
 
 }
