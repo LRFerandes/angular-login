@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   meuForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) { 
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { 
     this.meuForm = this.formBuilder.group({
       password: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -31,12 +33,15 @@ export class LoginComponent implements OnInit {
 
     this.http.post(this.apiURL, this.meuForm.value)
       .subscribe((response) => {
-        console.log('Resposta da API:', response);
-        // Lidar com a resposta da API aqui
+        if (response !== null) {
+          this.router.navigateByUrl('/successful');
+        }
       }, (error) => {
         console.error('Erro ao fazer solicitação:', error);
         // Lidar com erros aqui
       });
+
+      
 
 
   }

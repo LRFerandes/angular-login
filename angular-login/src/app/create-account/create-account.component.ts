@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-create-account',
   templateUrl: './create-account.component.html',
@@ -11,7 +13,7 @@ export class CreateAccountComponent implements OnInit {
   
   meuForm: FormGroup;
 
-  constructor(private http: HttpClient, private formBuilder: FormBuilder) { 
+  constructor(private http: HttpClient, private formBuilder: FormBuilder, private router: Router) { 
 
     this.meuForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -43,8 +45,9 @@ export class CreateAccountComponent implements OnInit {
 
     this.http.post(this.apiURL, this.meuForm.value)
       .subscribe((response) => {
-        console.log('Resposta da API:', response);
-        // Lidar com a resposta da API aqui
+        if (response === null) {
+          this.router.navigateByUrl('/successful');
+        }
       }, (error) => {
         console.error('Erro ao fazer solicitação:', error);
         // Lidar com erros aqui
