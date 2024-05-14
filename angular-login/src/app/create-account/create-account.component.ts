@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 import { Router } from '@angular/router';
 
@@ -11,17 +11,17 @@ import { Router } from '@angular/router';
 })
 export class CreateAccountComponent implements OnInit {
   
-  meuForm: FormGroup;
+  meuForm!: FormGroup;
 
   constructor(private http: HttpClient, private formBuilder: FormBuilder, private router: Router) { 
 
-    this.meuForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      password: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      userrole : 'admin',
+    //this.meuForm = this.formBuilder.group({
+     // name: ['', Validators.required],
+     // password: ['', Validators.required],
+     // email: ['', [Validators.required, Validators.email]],
+     // userrole : 'admin',
       // Outros campos do formulário
-    });
+  //  });
 
     
 
@@ -30,14 +30,30 @@ export class CreateAccountComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.meuForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
+    })
     
   }
   private apiURL = 'http://localhost:8080/register';
 
-  
+  get name(){
+    return this.meuForm.get('name')!
+  }
+  get email(){
+    return this.meuForm.get('email')!
+  }
+  get password(){
+    return this.meuForm.get('password')!
+  }
 
   submitForm() {
 
+    if(this.meuForm.invalid){
+      return;
+    }
     
     
     console.log('Formulário enviado!', this.meuForm);

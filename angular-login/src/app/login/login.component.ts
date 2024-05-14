@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 import { Router } from '@angular/router';
@@ -11,24 +11,38 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  meuForm: FormGroup;
+  meuForm!: FormGroup;
+  private apiURL = 'http://localhost:8080/login';
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { 
-    this.meuForm = this.formBuilder.group({
-      password: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+    //this.meuForm = this.formBuilder.group({
+      //password: ['', Validators.required],
+      //email: ['', [Validators.required, Validators.email]],
       // Outros campos do formulário
-    });
+    //});
   }
 
   ngOnInit(): void {
+    this.meuForm = new FormGroup({
+      password: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
+    })
   }
 
-  private apiURL = 'http://localhost:8080/login';
+  get email(){
+    return this.meuForm.get('email')!
+  }
+  get password(){
+    return this.meuForm.get('password')!
+  }
+
 
 
   submitForm() {
-    console.log('Formulário enviado!', this.meuForm);
+    
+    if(this.meuForm.invalid){
+      return;
+    }
     
 
     this.http.post(this.apiURL, this.meuForm.value)

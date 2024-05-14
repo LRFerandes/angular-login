@@ -1,15 +1,29 @@
 <div class="box_form">
-    <form  (ngSubmit)="submitForm()" [formGroup]="meuForm">
+    <form  (ngSubmit)="submitForm()" [formGroup]="meuForm" #formDir="ngForm">
       <p class="ptitle"> Create account </p>
 
         <div>
-            <input type="text" id="name" formControlName="name" placeholder="name"  required>
+            <input type="text"
+            id="name"
+            formControlName="name" 
+            placeholder="name"
+            [ngClass]="{ 'campo-invalido': name.invalid && formDir.submitted}"
+            >
         </div>
         <div>
-          <input type="email" id="email" formControlName="email" placeholder="email"  required>
+          <input type="email" 
+          id="email" 
+          formControlName="email" 
+          placeholder="email"
+          [ngClass]="{ 'campo-invalido': email.invalid && formDir.submitted}"  
+          >
         </div>
         <div>
-          <input type="password" id="password" formControlName="password" placeholder="password" required>
+          <input type="password" 
+          id="password" 
+          formControlName="password" 
+          placeholder="password"
+          [ngClass]="{ 'campo-invalido': password.invalid && formDir.submitted}">
         </div>
 
         <button type="submit">Create</button>
