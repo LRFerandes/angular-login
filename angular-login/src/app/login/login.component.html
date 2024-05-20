@@ -1,21 +1,24 @@
 <div class="box_form">
     <form (ngSubmit)="submitForm()" [formGroup]="meuForm" #formDir="ngForm">
-      <p class="ptitle"> Login </p>
-
+      <p class="ptitle"> Login </p>    
         <div>
+
+          <p *ngIf="sucesfull" class="error">Email ou senha invalidos</p>
+
           <input type="email" 
           id="email" 
           formControlName="email" 
           placeholder="Email" 
-          [ngClass]="{ 'campo-invalido': email.invalid && formDir.submitted}" 
+          [ngClass]="{ 'campo-invalido': email.invalid && formDir.submitted || sucesfull}" 
           >
+
         </div>
         <div>
           <input type="password" 
           id="password" 
           formControlName="password"
           placeholder="Password" 
-          [ngClass]="{ 'campo-invalido': password.invalid && formDir.submitted}"
+          [ngClass]="{ 'campo-invalido': password.invalid && formDir.submitted || sucesfull }"
           >
         </div>
         <button type="submit"> Login</button>

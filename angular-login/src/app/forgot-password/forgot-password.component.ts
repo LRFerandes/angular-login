@@ -13,6 +13,8 @@ export class ForgotPasswordComponent implements OnInit {
 
   meuForm!: FormGroup;
 
+  sucesfull : boolean = false;
+
   private apiURL = 'http://localhost:8080/recover';
 
   constructor(private http: HttpClient, private router: Router,private formBuilder: FormBuilder) { 
@@ -48,7 +50,7 @@ export class ForgotPasswordComponent implements OnInit {
         }
       }, (error) => {
         console.error('Erro ao fazer solicitação:', error);
-        // Lidar com erros aqui
+        this.sucesfull = true;
       });
   }
 }

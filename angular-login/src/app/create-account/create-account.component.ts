@@ -13,6 +13,8 @@ export class CreateAccountComponent implements OnInit {
   
   meuForm!: FormGroup;
 
+  sucesfull : boolean = false;
+
   constructor(private http: HttpClient, private formBuilder: FormBuilder, private router: Router) { 
 
     //this.meuForm = this.formBuilder.group({
@@ -66,7 +68,7 @@ export class CreateAccountComponent implements OnInit {
         }
       }, (error) => {
         console.error('Erro ao fazer solicitação:', error);
-        // Lidar com erros aqui
+        this.sucesfull = true;
       });
 
   }

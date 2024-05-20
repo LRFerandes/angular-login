@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { HttpClient } from '@angular/common/http';
 
 import { Router } from '@angular/router';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,9 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   meuForm!: FormGroup;
+
+  sucesfull : boolean = false;
+
   private apiURL = 'http://localhost:8080/login';
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { 
@@ -52,7 +56,7 @@ export class LoginComponent implements OnInit {
         }
       }, (error) => {
         console.error('Erro ao fazer solicitação:', error);
-        // Lidar com erros aqui
+        this.sucesfull = true;
       });
 
       

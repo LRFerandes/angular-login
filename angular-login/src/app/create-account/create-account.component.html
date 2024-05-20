@@ -3,6 +3,9 @@
       <p class="ptitle"> Create account </p>
 
         <div>
+
+          <p *ngIf="sucesfull" class="error">Email invalido</p>
+
             <input type="text"
             id="name"
             formControlName="name" 
@@ -15,7 +18,7 @@
           id="email" 
           formControlName="email" 
           placeholder="email"
-          [ngClass]="{ 'campo-invalido': email.invalid && formDir.submitted}"  
+          [ngClass]="{ 'campo-invalido': email.invalid && formDir.submitted || sucesfull}"  
           >
         </div>
         <div>

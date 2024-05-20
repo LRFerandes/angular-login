@@ -86,4 +86,15 @@ a:hover{
 }
 
 
+
+.error{
+    background-color: rgb(255, 0, 0);
+    color: white;
+
+    padding: 5px;
+    margin-bottom: 5px;
+
+}
+
+
   
